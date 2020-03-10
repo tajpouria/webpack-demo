@@ -2,17 +2,12 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: path.resolve(__dirname, "src/index.js"),
+  entry: {
+    index: path.resolve(__dirname, "src/index.js"),
+    vendor: path.resolve(__dirname, "src/vendor.js"),
+  },
   module: {
     rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          "style-loader", // setupThree: inject js style code as a <style> tag into the dom
-          "css-loader", // stepTwo: turn css to common.js
-          "sass-loader", // stepOne: turn scss to css
-        ],
-      },
       {
         test: /\.html$/,
         use: ["html-loader"],
@@ -30,11 +25,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    // Inject JS to DOM
-    new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: "src/template.html",
-    }),
-  ],
 };
